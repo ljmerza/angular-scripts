@@ -1,0 +1,4 @@
+/*angular adds validation classes - if all three classes exist on same elemtn then show red border*/
+.form-control.ng-touched.ng-invalid {
+	border: 2px solid red;
+}

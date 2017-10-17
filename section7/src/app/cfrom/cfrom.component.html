@@ -1,0 +1,80 @@
+<!-- angular auto adds ngForm - create local var and set to ngForm 
+ngForm has ngSubmit Output so we bind that to submit function passing f-->
+<form #f='ngForm' (ngSubmit)='submit(f)'>
+	<!-- group of inputs with ngModelGroup  nests values inside its own object-->
+	<div ngModelGroup='contact' #contact='ngModelGroup'>
+	<!-- see if entire group is valid -->
+	<div *ngIf='contact.valid'>...</div>
+		<input 
+				required minlength='4' 
+				maxlength='10' 
+				pattern='regex' 
+				ngModel 
+				name="firstName" 
+				#firstName="ngModel" 
+				(change)="log(firstName)" 
+				id='firstName' 
+				type="text" 
+				class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="">First Name</label>
+		<!-- template driven approach #firstNme == set local firstname var to ngModel
+		to pass in <log></log> evet-->
+		
+		<!-- only show if firstName template var has been focused and is empty -->
+		<div 
+			class='alert alert-danger' 
+			*ngIf='firstName.touched && !firstName.valid'>
+			
+			<div *ngIf='firstName.errors.required'>
+				First Name is required
+			</div>
+			<div *ngIf='firstName.errors.minlength'>
+				First Name should be a minimum of {{firstName.errors.minlength.requiredLength}} characters
+			</div>
+			<div *ngIf='firstName.errors.pattern'>
+				First Name RegEx error
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="comment">Comment</label>
+		<textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+	</div>
+
+	<div class="checkbox">
+		<label><input type="checkbox" ngModel name='isSubscribed'>Subscribe</label>
+	</div>
+
+	<div class="form-group">
+		<label for="cntmethod"></label>
+		<select ngModel name="cntmethod" id="cntmethod" class="form-control">
+		<!-- can use ngValue instead of value to bind complex objets - value only allows strings -->
+			<option *ngFor='let method of cntMethods' [ngValue]="method">{{method.name}}</option>
+		</select>
+	</div>
+
+	<div class="radio">
+		<label><input ngModel type="radio" name="radioEx" value='0'>Email</label>
+	</div>
+	<div class="radio" *ngFor='let method of cntMethods'>
+		<label><input ngModel type="radio" name="radioEx" [value]='method.id'>{{method.name}}</label>
+	</div>
+
+	<!-- disable if not valid on entire form -->
+	<button class="btn btn-primary" [disabled]='!f.valid'>Submit</button>
+</form>
+
+<br><br>
+<p>{{f.value | json}}</p>
+
+
+
+
+
+
+
+
+
+

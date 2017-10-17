@@ -1,0 +1,53 @@
+<form [formGroup]='form' (ngSubmit)='changePassword()'>
+	<div class="form-group">
+		<label for="oldPass">Old Password</label>
+		<input 
+			type="password" 
+			class="form-control" 
+			id="oldPass"
+			name='oldPass'
+			formControlName='oldPass'
+		>
+		<div 
+			*ngIf="oldPass.touched && oldPass.errors && oldPass.errors.required" 
+			class="alert alert-danger">Old password required.</div>
+		<div 
+			*ngIf="oldPass.touched && oldPass.errors && oldPass.errors.VerifyPass" 
+			class="alert alert-danger">Old password is incorrect.</div>
+
+		<label for="oldPass">New Password</label>
+		<input 
+			type="password" 
+			class="form-control" 
+			id="newPass"
+			name='newPass'
+			formControlName='newPass'
+		>
+		<div 
+			*ngIf="newPass.touched && newPass.errors && newPass.errors.required" 
+			class="alert alert-danger">New password required.</div>
+
+		<label for="oldPass">Verify New Password</label>
+		<input 
+			type="password" 
+			class="form-control" 
+			id="newPassB"
+			name='newPassB'
+			formControlName='newPassB'
+		>
+		<div 
+			*ngIf="newPassB.touched && newPassB.errors && newPassB.errors.required" 
+			class="alert alert-danger">Verifying new password required.</div>
+
+	</div>
+	<div class="alert alert-danger" 
+	*ngIf='(form.errors && form.errors.invalidLogin) || (newPass.touched && newPassB.touched && newPassB.value !== newPass.value)'>
+		New password mismatch!
+	</div>
+
+	<button class="btn btn-primary" type='submit'>Change Password</button>
+
+	<div class="alert alert-info" *ngIf='changedP'>Password changed!</div>
+	<div class="alert alert-danger" *ngIf='form.errors && form.errors.invalidLogin'>Password change error!</div>
+	
+</form>
