@@ -1,0 +1,9 @@
+{{#if is_multiple}}
+	{{#power-select-multiple options=model selected=selected placeholder=placeholder onchange=(action 'saveModel') as |item|}}
+          {{yield item}}
+	{{/power-select-multiple}}
+{{else}}
+	{{#power-select options=model selected=selected placeholder=placeholder onchange=(action 'saveModel') as |item|}}
+		{{yield item}}
+	{{/power-select}}
+{{/if}}
