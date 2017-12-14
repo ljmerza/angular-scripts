@@ -1,3 +1,22 @@
-{{#edit-fields/select-field model=model as |item|}}
+{{!-- {{#edit-fields/select-field model=model as |item|}}
 	{{item.id}} - {{item.title}}
-{{/edit-fields/select-field}}
+{{/edit-fields/select-field}} --}}
+
+
+
+<ul>
+	<li>{{model.id}}</li>
+	<li>{{model.start}}</li>
+	<li>{{model.end}}</li>
+</ul>
+
+<br>
+{{#each model.referral as |ref|}}
+<ul>
+	<li>{{ref.id}}</li>
+	<li>{{ref.stop}}</li>
+	<li>{{ref.go}}</li>
+	<li>{{ref.log.log}}</li>		
+</ul>
+<br>
+{{/each}}

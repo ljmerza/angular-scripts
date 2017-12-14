@@ -8,5 +8,5 @@ export default RESTSerializer.extend({
 
 	normalizeResponse (store, primaryModelClass, payload, id, requestType){
 		return this._super(store, primaryModelClass, {data:payload}, id, requestType);
-	}
+	},
 });
